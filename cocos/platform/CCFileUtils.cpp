@@ -34,7 +34,7 @@ THE SOFTWARE.
 #include "platform/CCSAXParser.h"
 //#include "base/ccUtils.h"
 
-#include "tinyxml2/tinyxml2.h"
+#include "tinyxml2.h"
 #ifdef MINIZIP_FROM_SYSTEM
 #include <minizip/unzip.h>
 #else // from our embedded sources

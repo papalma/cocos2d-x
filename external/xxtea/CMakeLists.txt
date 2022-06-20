@@ -5,26 +5,16 @@ set(target_name ext_${lib_name})
 
 project(${lib_name})
 
-include(../cmake/CocosExternalConfig.cmake)
-
-add_library(${target_name} STATIC IMPORTED GLOBAL)
-
-set_target_properties(${target_name} PROPERTIES
-  INTERFACE_INCLUDE_DIRECTORIES "${CMAKE_CURRENT_SOURCE_DIR}/include"
+add_library(${target_name} STATIC
+  xxtea.cpp
 )
 
-if(WINDOWS)
-  set_target_properties(${target_name} PROPERTIES
-    # need use absolutely path
-    IMPORTED_LOCATION_DEBUG "${platform_spec_path}/debug/lib${lib_name}.lib"
-    IMPORTED_LOCATION_RELEASE "${platform_spec_path}/release/lib${lib_name}.lib"
-  )
-  set_target_properties(${target_name} PROPERTIES
-    MAP_IMPORTED_CONFIG_MINSIZEREL Release
-    MAP_IMPORTED_CONFIG_RELWITHDEBINFO Release
-  )
-else()
-  set_target_properties(${target_name} PROPERTIES
-    IMPORTED_LOCATION "${platform_spec_path}/lib${lib_name}.a"
-  )
-endif()
+target_include_directories(${target_name} PUBLIC .)
+
+set_target_properties(${target_name}
+    PROPERTIES
+    ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib"
+    LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib"
+    FOLDER "External"
+)
+

@@ -148,11 +148,13 @@ if(XCODE OR VS)
     cocos_mark_code_files("cocos2d")
 endif()
 
+if(!APPLE)
 if(${CMAKE_VERSION} VERSION_GREATER "3.16.0")
     message("CMake 3.16 target_precompile_headers")
     target_precompile_headers(cocos2d PRIVATE 
        "$<$<COMPILE_LANGUAGE:CXX>:cocos2d.h>")
 endif()
+endif(!APPLE)
 
 #if(XCODE)
 #    # Later versions of Xcode clang want to compile C++17 with aligned allocation turned on and this is only supported on iOS 11.0+
